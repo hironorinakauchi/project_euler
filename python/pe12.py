@@ -1,3 +1,5 @@
+#first try on my own
+
 from functools import reduce
 def triangle_num(n):
     """
@@ -20,10 +22,35 @@ def factors(n):
 
 def main():
     n = 1
-    tri_lst = factors2(n)
+    tri_lst = factors(n)
     while len(tri_lst) <= 100:
         n += 1
         tri_lst = factors(n)
     return reduce(lambda x,y: x*y, tri_lst)
 
+# second try with help of online resources
+
+import math
+
+def get_factors(n):
+    """
+    returns a number of factors of n.
+    note: n % i => False if divisible.
+    """
+    return sum(2 for i in range(1, round(math.sqrt(n)+1)) if not n % i)
+
+def generate_triangles(limit):
+    """
+    returns n(n+1)/2 as needed
+    """
+    l = 1
+    while l < limit:
+        yield sum(range(1, l+1))
+        l += 1
+
+def test_triangles():
+    triangles = generate_triangles(100000)
+    for i in triangles:
+        if get_factors(i) >= 500:
+            return i
 
